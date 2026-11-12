@@ -30,7 +30,7 @@ jobs:
 
     - name: Initialize Capacitor Android
       run: |
-        npx cap update android
+        npx cap sync android
 
     - name: Build Android App Bundle (Release AAB)
       working-directory: ./android
