@@ -28,7 +28,7 @@ jobs:
         npm install
         npm run build
 
-    - name: Initialize Capacitor Android
+    - name: Sync Capacitor Android
       run: |
         npx cap sync android
 
