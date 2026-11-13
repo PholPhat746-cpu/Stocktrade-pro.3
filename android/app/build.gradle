@@ -1,23 +1,26 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace "com.stocktradepro.app"
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    defaultConfig {
-        applicationId "com.stocktradepro.app"
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    namespace 'com.stocktradepro.app'
+    compileSdkVersion 34
+
+    signingConfigs {
+        release {
+            storeFile file('release-key.jks')
+            storePassword '123456'
+            keyAlias 'stocktradekey'
+            keyPassword '123456'
+        }
     }
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 }
+
 
 repositories {
     flatDir {
