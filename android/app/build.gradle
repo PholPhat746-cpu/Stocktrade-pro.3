@@ -1,4 +1,4 @@
-papply plugin: 'com.android.application'
+apply plugin: 'com.android.application'
 
 android {
     namespace 'com.stocktradepro.app'
