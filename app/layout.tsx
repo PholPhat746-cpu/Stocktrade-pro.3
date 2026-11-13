@@ -1,4 +1,5 @@
 import './globals.css';
+import { Analytics } from '@vercel/analytics/next';
 
 export const metadata = {
   title: 'StockTrade Pro',
@@ -14,6 +15,7 @@ export default function RootLayout({
     <html lang="th">
       <body className="bg-neutral-950 text-neutral-100 min-h-screen">
         {children}
+        <Analytics />
       </body>
     </html>
   )
