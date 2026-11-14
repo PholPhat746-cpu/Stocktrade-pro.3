@@ -1,23 +1,28 @@
+import type { Metadata } from 'next';
+import Script from 'next/script';
 import './globals.css';
-import { Analytics } from '@vercel/analytics/next';
 
-export const metadata = {
-  title: 'StockTrade Pro',
-  description: 'Advanced Trading & Journalytix Partner',
-}
+export const metadata: Metadata = {
+  title: 'Stocktrade Pro',
+  description: 'แพลตฟอร์มซื้อขายและติดตามข้อมูลการลงทุน',
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="th">
-      <body className="bg-neutral-950 text-neutral-100 min-h-screen">
+      <body>
         {children}
-        <Analytics />
+
+        {/* CJ Affiliate Impression Tracking */}
+        <Script
+          src="https://www.anrdoezrs.net/am/101927027/impressions/page/am.js"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
-  )
+  );
 }
-
