@@ -1,4 +1,5 @@
 'use client';
+import WebViewChart from "../components/WebViewChart";
 
 import React, { useState, useEffect } from 'react';
 import { Activity, Wallet, TrendingUp, ArrowUpRight, LogOut, Trophy, BarChart2, BookOpen, Info, Code, Smartphone, Target, Layers } from 'lucide-react';
@@ -532,64 +533,10 @@ export default function StockTradePro() {
             )}
 
             <div style={{ backgroundColor: '#0f172a', borderRadius: '8px', padding: '12px', border: '1px solid #1e293b', marginBottom: '10px' }}>
-              <div style={{ height: '220px', width: '100%', position: 'relative' }}>
-                <svg 
-                  viewBox="0 0 420 200" 
-                  onClick={handleChartClick}
-                  style={{ width: '100%', height: '100%', overflow: 'visible', cursor: drawingTool !== 'NONE' ? 'crosshair' : 'default' }}
-                >
-                  <line x1="0" y1="40" x2="420" y2="40" stroke="#1e293b" strokeDasharray="3,3" />
-                  <line x1="0" y1="100" x2="420" y2="100" stroke="#1e293b" strokeDasharray="3,3" />
-                  <line x1="0" y1="160" x2="420" y2="160" stroke="#1e293b" strokeDasharray="3,3" />
-
-                  {drawnLines.map((line, idx) => {
-                    const yPos = scaleY(line.price);
-                    const isSupport = line.type === 'SUPPORT';
-                    return (
-                      <g key={idx}>
-                        <line x1="0" y1={yPos} x2="420" y2={yPos} stroke={isSupport ? '#10b981' : '#ef4444'} strokeWidth="1.5" strokeDasharray="4,2" />
-                        <text x="5" y={yPos - 3} fill={isSupport ? '#34d399' : '#f87171'} fontSize="9" fontWeight="bold">
-                          {isSupport ? 'Support' : 'Resistance'}: ${line.price.toFixed(2)}
-                        </text>
-                      </g>
-                    );
-                  })}
-
-                  <line 
-                    x1="0" 
-                    y1={scaleY(selectedStock.price)} 
-                    x2="420" 
-                    y2={scaleY(selectedStock.price)} 
-                    stroke={isPositiveChange ? '#10b981' : '#ef4444'} 
-                    strokeWidth="1" 
-                    strokeDasharray="2,2" 
-                  />
-
-                  {candles.map((bar, i) => {
-                    const isGreen = bar.close >= bar.open;
-                    const color = isGreen ? '#10b981' : '#ef4444';
-                    // ปรับขนาดแท่งเทียนให้อัตโนมัติตามจำนวนแท่ง (ถ้าเลือก 3M จะมีแท่งเทียนเยอะขึ้น)
-                    const candleWidth = timeframe === '3M' ? 10 : 12;
-                    const gap = timeframe === '3M' ? 3 : 15;
-                    const x = i * (candleWidth + gap) + 8;
-
-                    const yHigh = scaleY(bar.high);
-                    const yLow = scaleY(bar.low);
-                    const yOpen = scaleY(bar.open);
-                    const yClose = scaleY(bar.close);
-
-                    const bodyTop = Math.min(yOpen, yClose);
-                    const bodyHeight = Math.max(3, Math.abs(yClose - yOpen));
-
-                    return (
-                      <g key={i}>
-                        <line x1={x + candleWidth / 2} y1={yHigh} x2={x + candleWidth / 2} y2={yLow} stroke={color} strokeWidth="1.2" />
-                        <rect x={x} y={bodyTop} width={candleWidth} height={bodyHeight} fill={color} rx="1" />
-                      </g>
-                    );
-                  })}
-                </svg>
-              </div>
+          <WebViewChart
+            symbol={selectedStock.symbol === 'PTT' ? 'SET:PTT' : selectedStock.symbol}
+            interval={timeframe === '5M' ? '5' : timeframe === '1H' ? '60' : timeframe === '1W' ? 'W' : timeframe === '3M' ? '3M' : 'D'}
+          />
 
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '10px', color: '#94a3b8', marginTop: '8px', borderTop: '1px solid #1e293b', paddingTop: '6px' }}>
                 <span>TF: {timeframe} | High: ${selectedStock.high.toFixed(2)} | Low: ${selectedStock.low.toFixed(2)}</span>

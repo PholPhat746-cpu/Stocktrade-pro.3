@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace 'com.stocktradepro3.app'
+    namespace 'com.trade.stocktrade_pro'
     compileSdkVersion 36
 
     defaultConfig {
-        applicationId "com.stocktradepro3.app"
+        applicationId "com.trade.stocktrade_pro"
         minSdkVersion 24
         targetSdkVersion 36
         versionCode 3
