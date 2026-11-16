@@ -38,3 +38,9 @@ ext {
     androidxEspressoCoreVersion = '3.5.1'
     junitVersion = '4.13.2'
 }
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
